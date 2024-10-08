@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Color de Fondo con Controles RGB</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: rgb(23, 41, 56);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Controlador de Color de Fondo</h1>
+    <div class="contenedor">
+        <div>
+            <label for="rojo">Rojo: <span id="texto-rojo">0</span></label>
+            <input type="range" id="rojo" min="0" max="255" value="0">
+        </div>
+        <div>
+            <label for="verde">Verde: <span id="texto-verde">0</span></label>
+            <input type="range" id="verde" min="0" max="255" value="0">
+        </div>
+        <div>
+            <label for="azul">Azul: <span id="texto-azul">0</span></label>
+            <input type="range" id="azul" min="0" max="255" value="0">
+        </div>
+    </div>
+    <script>
+        const inputRojo = document.getElementById('rojo');
+        const inputVerde = document.getElementById('verde');
+        const inputAzul = document.getElementById('azul');
+
+        const textoRojo = document.getElementById('texto-rojo');
+        const textoVerde = document.getElementById('texto-verde');
+        const textoAzul = document.getElementById('texto-azul');
+
+        function actualizarColor(rojo, verde, azul) {
+            document.body.style.backgroundColor = `rgb(${rojo}, ${verde}, ${azul})`;
+        }
+
+        inputRojo.addEventListener('input', (e) => {
+            let rojo = e.target.value;
+            textoRojo.textContent = rojo;
+            actualizarColor(rojo, inputVerde.value, inputAzul.value);
+        });
+
+        inputVerde.addEventListener('input', (e) => {
+            let verde = e.target.value;
+            textoVerde.textContent = verde;
+            actualizarColor(inputRojo.value, verde, inputAzul.value);
+        });
+
+        inputAzul.addEventListener('input', (e) => {
+            let azul = e.target.value;
+            textoAzul.textContent = azul;
+            actualizarColor(inputRojo.value, inputVerde.value, azul);
+        });
+    </script>
+</body>
+</html>
